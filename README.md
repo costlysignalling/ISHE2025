@@ -6,9 +6,13 @@ If we leave these decisions unspecified and try to make them on the fly, two dan
 
 This workshop will demonstrate the dangers of "too many options" through a practical exercise in R and introduce ways to recognize individuals and research fields that (on average) are not fully honest or responsible with their data.
 
+
 There are three files for the workshop that will be used depending on time.
+
 **clever_hansing** is the most important one
+
 **dropstep** we may start with this one. The take home message is "do not drop and step"
+
 **cheater detection** is a great technique, which, however, may stop working with the advant of widespread AI usage, so there is no need to save time for this one
 
 
