@@ -97,7 +97,7 @@ summary(lm(stm~sex))
 
 
 #Use whatever option that had smallest p-value
-stm<-rowMeans(STM,na.rm=T)/rowMeans(LTM,na.rm=T) #Ratio of STM and LTM
+stm<-rowMeans(STM2,na.rm=T)
 
 #And create a dataset
 d<-data.frame(ID=1:length(stm),stm,sex,ori,age,stat,resp.time)
@@ -115,20 +115,20 @@ summary(lm(stm~sex,data=d1))
 summary(lm(stm~sex,data=d2))
 summary(lm(stm~sex,data=d3))
 
-d<-d1 #Again, a tough decision. Just to be sure, just include data point that do ot ruin your results, what can go wrong?
+d<-d3 #Again, a tough decision. Just to be sure, just include data point that do ot ruin your results, what can go wrong?
 
 #Oh! And by the way, some people took too much time to complete the questionnaire! Do you think their responses are reliable
 hist(d$resp.time,breaks=60)
 hist(log(d$resp.time))
 
-#Let us say that 20 questions should not take longer an hour, right?
+#Let us say that 20 questions should not take longer than an hour, right?
 d1<-d #Keep all
 d2<-d[d$resp.time<60,] #Keep those that took less than an hour
 
 summary(lm(stm~sex,data=d1))
 summary(lm(stm~sex,data=d2))
 
-d<-d1 #Again, a tough decision is to be made
+d<-d2 #Again, a tough decision is to be made
 
 #And we have nice and relibale data
 #But wait a minute. Some individuals may not be heterosexual and we have this information!
@@ -163,7 +163,7 @@ summary(lm(stm~sex,data=d2))
 summary(lm(stm~sex,data=d3))
 summary(lm(stm~sex,data=d4))
   
-d<-d2 #The tough decision
+d<-d1 #The tough decision
 
 #But what if the relationship status is playing some tricks with the preferences?
 #Relationship status
@@ -208,7 +208,7 @@ summary(lm(stm~sex,data=d1))
 summary(lm(stm~sex,data=d2))
 summary(lm(stm~sex,data=d3))
 
-d<-d2 #The tough decision
+d<-d1 #The tough decision
 
 #But what about the shape of the distribution?
 #transform
@@ -226,8 +226,22 @@ summary(lm(stm~sex,data=d1))
 summary(lm(stm~sex,data=d2))
 summary(lm(stm~sex,data=d3))
 
-d<-d3 #Here is your final data! Congrats!
+d<-d2 #Here is your final data! Congrats!
 
 summary(lm(stm~sex,data=d))
+
+
+#Ok! Now you write the paper and submit it somewhere. But there is a nitpicking reviewer that points out that your dataset comes from two universities! One technical and one oriented on humanities! He wants you to analyze the data separately, just to see what happens...
+
+d$school<-sample(c("Tech","Hum"), nrow(d), replace = TRUE, prob = c(0.5, 0.5))
+
+#Let us see
+summary(lm(stm~sex,data=d[d$school=="Tech", ]))
+summary(lm(stm~sex,data=d[d$school=="Hum", ]))
+
+#We can get a similar picture from the model with interaction
+summary(lm(stm~sex*school,data=d)) #How would you interpret the results?
+
+
 
 
