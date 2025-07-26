@@ -1,4 +1,4 @@
-# A list of decisions that should be made before data colletcion
+## A list of decisions that should be made before data colletcion
 
 1. How many participants do I need? Do my statistical methods require a power analysis before data collection?
 2. Use raw measure, difference, or ratio?
